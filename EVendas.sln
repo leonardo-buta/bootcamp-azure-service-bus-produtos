@@ -19,9 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evendas.Data", "src\Evendas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evendas.Application", "src\Evendas.Application\Evendas.Application.csproj", "{48D9518F-FB76-4287-88A4-5B4E5BF4D3C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evendas.API.ModuloVendas", "Evendas.API.ModuloVendas\Evendas.API.ModuloVendas.csproj", "{B6A997F6-6FB3-4D20-A2EC-E26528472E87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Evendas.API.ModuloVendas", "src\Evendas.API.ModuloVendas\Evendas.API.ModuloVendas.csproj", "{B6A997F6-6FB3-4D20-A2EC-E26528472E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evendas.IoC", "Evendas.IoC\Evendas.IoC.csproj", "{ECEA6EFD-6627-4526-9A7A-44A66FD62E91}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Evendas.IoC", "src\Evendas.IoC\Evendas.IoC.csproj", "{ECEA6EFD-6627-4526-9A7A-44A66FD62E91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
