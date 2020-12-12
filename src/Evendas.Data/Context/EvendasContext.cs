@@ -6,6 +6,8 @@ namespace Evendas.Data.Context
 {
     public class EvendasContext : DbContext
     {
+        public EvendasContext(DbContextOptions<EvendasContext> options) : base(options) { }
+
         public DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

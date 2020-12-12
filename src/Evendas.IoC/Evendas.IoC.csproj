@@ -9,8 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Evendas.Application\Evendas.Application.csproj" />
-    <ProjectReference Include="..\src\Evendas.Data\Evendas.Data.csproj" />
+    <ProjectReference Include="..\Evendas.Application\Evendas.Application.csproj" />
+    <ProjectReference Include="..\Evendas.Data\Evendas.Data.csproj" />
   </ItemGroup>
 
 </Project>
