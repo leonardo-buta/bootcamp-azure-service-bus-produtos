@@ -22,6 +22,16 @@ namespace Evendas.Application.Services
             _produtoRepository = produtoRepository;
         }
 
+        public async Task<GetProdutoRequest> GetByIdAsync(long id)
+        {
+            return _mapper.Map<GetProdutoRequest>(await _produtoRepository.GetByIdAsync(id));
+        }
+
+        public async Task<GetProdutoRequest> GetByCodProdutoAsync(string codProduto)
+        {
+            return _mapper.Map<GetProdutoRequest>(_produtoRepository.GetAll().Where(x => x.CodProduto.ToUpper() == codProduto.ToUpper()).FirstOrDefault());
+        }
+
         public async Task Create(CreateProdutoRequest createProductRequest)
         {
             if (createProductRequest.Preco > 0 && createProductRequest.QtdEstoque > 0)
@@ -44,9 +54,26 @@ namespace Evendas.Application.Services
             await _uow.CommitAsync();
         }
 
+        public async Task VenderProduto(string codProduto, int quantidade)
+        {
+            var produto = _produtoRepository.GetAll().Where(x => x.CodProduto.ToUpper() == codProduto.ToUpper()).FirstOrDefault();
+
+            if (produto.QtdEstoque - quantidade >= 0)
+            {
+                produto.QtdEstoque -= quantidade;
+                _produtoRepository.Update(produto);
+                await _uow.CommitAsync();
+            }
+        }
+
         public IEnumerable<GetProdutoRequest> GetAll()
         {
             return _mapper.Map<List<GetProdutoRequest>>(_produtoRepository.GetAll());
+        }
+
+        public IEnumerable<GetProdutoRequest> GetAllWithStock()
+        {
+            return _mapper.Map<List<GetProdutoRequest>>(_produtoRepository.GetAll().Where(x => x.QtdEstoque > 0));
         }
     }
 }

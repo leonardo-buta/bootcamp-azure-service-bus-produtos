@@ -19,10 +19,27 @@ namespace EVendas.API.ModuloEstoque.Controllers
         }
 
         [HttpGet]
+        [Route("Listagem")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<GetProdutoRequest>> Get()
+        public ActionResult<List<GetProdutoRequest>> GetAll()
         {
             return Ok(_produtoAppService.GetAll());
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetByIdAsync(long id)
+        {
+            return Ok(await _produtoAppService.GetByIdAsync(id));
+        }
+
+        [HttpGet]
+        [Route("codProduto/{codProduto}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetByCodProdutoAsync(string codProduto)
+        {
+            return Ok(await _produtoAppService.GetByCodProdutoAsync(codProduto));
         }
 
         [HttpPost]
@@ -45,7 +62,7 @@ namespace EVendas.API.ModuloEstoque.Controllers
         [ProducesResponseType(typeof(UpdateProdutoRequest), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(int id, [FromBody][Required] UpdateProdutoRequest updateRequest)
+        public async Task<IActionResult> Update(long id, [FromBody][Required] UpdateProdutoRequest updateRequest)
         {
             if (!ModelState.IsValid)
             {
