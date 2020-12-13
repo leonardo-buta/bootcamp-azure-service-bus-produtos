@@ -3,6 +3,7 @@ using Evendas.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Evendas.Data.Repositories
@@ -41,6 +42,11 @@ namespace Evendas.Data.Repositories
         public virtual async Task RemoveAsync(long id)
         {
             DbSet.Remove(await DbSet.FindAsync(id));
+        }
+
+        public Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return DbSet.AnyAsync(predicate);
         }
 
         public async Task<int> SaveChangesAsync()

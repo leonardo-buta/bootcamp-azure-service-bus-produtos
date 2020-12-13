@@ -1,5 +1,6 @@
 ﻿using Evendas.Data.Context;
 using Evendas.Domain.Interfaces;
+using System.Threading.Tasks;
 
 namespace Evendas.Data.UnitOfWork
 {
@@ -12,9 +13,9 @@ namespace Evendas.Data.UnitOfWork
             _context = context;
         }
 
-        public bool Commit()
+        public async Task<bool> CommitAsync()
         {
-            return _context.SaveChanges() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

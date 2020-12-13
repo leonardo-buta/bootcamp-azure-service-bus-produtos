@@ -10,6 +10,7 @@ namespace Evendas.Application.AutoMapper
         {
             CreateMap<CreateProdutoRequest, Produto>();
             CreateMap<UpdateProdutoRequest, Produto>();
+            CreateMap<Produto, GetProdutoRequest>();
         }
     }
 }

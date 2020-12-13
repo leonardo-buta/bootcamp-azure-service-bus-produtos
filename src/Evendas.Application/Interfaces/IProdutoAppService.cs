@@ -7,7 +7,7 @@ namespace Evendas.Application.Interfaces
     public interface IProdutoAppService
     {
         Task Create(CreateProdutoRequest createProductRequest);
-        Task Update(UpdateProdutoRequest updateProductRequest);
-        IEnumerable<ProdutoResult> GetAll();        
+        Task Update(long id, UpdateProdutoRequest updateProductRequest);
+        IEnumerable<GetProdutoRequest> GetAll();        
     }
 }

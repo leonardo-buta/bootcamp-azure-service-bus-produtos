@@ -1,6 +1,6 @@
 ﻿namespace Evendas.Application.RequestsModel
 {
-    public class ProdutoResult
+    public class GetProdutoRequest
     {
         public long Id { get; set; }
 

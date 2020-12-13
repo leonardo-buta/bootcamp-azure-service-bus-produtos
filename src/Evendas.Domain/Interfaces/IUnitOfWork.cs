@@ -1,7 +1,9 @@
-﻿namespace Evendas.Domain.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace Evendas.Domain.Interfaces
 {
     public interface IUnitOfWork
     {
-        bool Commit();
+        Task<bool> CommitAsync();
     }
 }
