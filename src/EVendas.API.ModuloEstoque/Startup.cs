@@ -1,5 +1,6 @@
 using AutoMapper;
 using Evendas.Application.AutoMapper;
+using Evendas.Application.Interfaces;
 using Evendas.Data.Context;
 using Evendas.IoC;
 using Microsoft.AspNetCore.Builder;
@@ -52,6 +53,9 @@ namespace EVendas.ModuloEstoque
             services.AddDbContext<EvendasContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //var busSubscription = app.ApplicationServices.GetService<IServiceBusTopicSubscription>();
+            //busSubscription.PrepareFiltersAndHandleMessages().GetAwaiter().GetResult();
+
             services.AddMvc();
         }
 
@@ -75,6 +79,11 @@ namespace EVendas.ModuloEstoque
             {
                 endpoints.MapControllers();
             });
+
+            // Bus Subscription
+            var scope = app.ApplicationServices.CreateScope();
+            var service = scope.ServiceProvider.GetService<IServiceBusTopicSubscription>();
+            service.RegisterMessageHandlerProdutoVendido();
         }
     }
 }

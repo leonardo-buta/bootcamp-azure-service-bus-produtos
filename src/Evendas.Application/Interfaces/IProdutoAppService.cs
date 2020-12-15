@@ -9,7 +9,7 @@ namespace Evendas.Application.Interfaces
         Task<GetProdutoRequest> GetByIdAsync(long id);
         Task<GetProdutoRequest> GetByCodProdutoAsync(string codProduto);
         Task Create(CreateProdutoRequest createProductRequest);
-        Task Update(long id, UpdateProdutoRequest updateProductRequest);
+        Task Update(string codProduto, UpdateProdutoRequest updateProductRequest);
         IEnumerable<GetProdutoRequest> GetAll();
         IEnumerable<GetProdutoRequest> GetAllWithStock();
         Task VenderProduto(string codProduto, int quantidade);

@@ -46,9 +46,9 @@ namespace Evendas.Application.Services
             }
         }
 
-        public async Task Update(long id, UpdateProdutoRequest updateProductRequest)
+        public async Task Update(string codProduto, UpdateProdutoRequest updateProductRequest)
         {
-            var produto = await _produtoRepository.GetByIdAsync(id);
+            var produto = _produtoRepository.GetAll().Where(x => x.CodProduto.ToUpper() == codProduto.ToUpper()).FirstOrDefault();
             _mapper.Map(updateProductRequest, produto);
             _produtoRepository.Update(produto);
             await _uow.CommitAsync();

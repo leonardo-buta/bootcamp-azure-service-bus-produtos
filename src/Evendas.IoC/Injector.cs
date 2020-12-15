@@ -1,4 +1,5 @@
 ﻿using Evendas.Application.Interfaces;
+using Evendas.Application.ServiceBus;
 using Evendas.Application.Services;
 using Evendas.Data.Context;
 using Evendas.Data.Repositories;
@@ -19,6 +20,10 @@ namespace Evendas.IoC
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<EvendasContext>();
+
+            // ServiceBus
+            services.AddScoped<IServiceBusSender, ServiceBusSender>();
+            services.AddScoped<IServiceBusTopicSubscription, ServiceBusTopicSubscription>();
         }
     }
 }

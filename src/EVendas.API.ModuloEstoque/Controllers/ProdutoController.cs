@@ -12,10 +12,12 @@ namespace EVendas.API.ModuloEstoque.Controllers
     public class ProdutoController : Controller
     {
         private readonly IProdutoAppService _produtoAppService;
+        private readonly IServiceBusSender _serviceBusSender;
 
-        public ProdutoController(IProdutoAppService produtoAppService)
+        public ProdutoController(IProdutoAppService produtoAppService, IServiceBusSender serviceBusSender)
         {
             _produtoAppService = produtoAppService;
+            _serviceBusSender = serviceBusSender;
         }
 
         [HttpGet]
@@ -53,23 +55,25 @@ namespace EVendas.API.ModuloEstoque.Controllers
             }
 
             await _produtoAppService.Create(produtoRequest);
+            await _serviceBusSender.SendCreateProdutoMessage(produtoRequest);
 
             return Ok(produtoRequest);
         }
 
         [HttpPut]
-        [Route("{id}")]
+        [Route("{codProduto}")]
         [ProducesResponseType(typeof(UpdateProdutoRequest), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update(long id, [FromBody][Required] UpdateProdutoRequest updateRequest)
+        public async Task<IActionResult> Update(string codProduto, [FromBody][Required] UpdateProdutoRequest updateRequest)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _produtoAppService.Update(id, updateRequest);
+            await _produtoAppService.Update(codProduto, updateRequest);
+            await _serviceBusSender.SendUpdateProdutoMessage(codProduto, updateRequest);
 
             return Ok(updateRequest);
         }

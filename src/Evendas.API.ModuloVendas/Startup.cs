@@ -1,5 +1,6 @@
 using AutoMapper;
 using Evendas.Application.AutoMapper;
+using Evendas.Application.Interfaces;
 using Evendas.Data.Context;
 using Evendas.IoC;
 using Microsoft.AspNetCore.Builder;
@@ -66,6 +67,12 @@ namespace Evendas.API.ModuloVendas
             {
                 endpoints.MapControllers();
             });
+
+            // Bus Subscription
+            var scope = app.ApplicationServices.CreateScope();
+            var service = scope.ServiceProvider.GetService<IServiceBusTopicSubscription>();
+            service.RegisterMessageHandlerCreateProduto();
+            service.RegisterMessageHandlerUpdateProduto();
         }
     }
 }
